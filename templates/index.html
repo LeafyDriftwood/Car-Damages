@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content = "width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Car Detection</title>
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='newstyle3.css') }}"/>
+
+</head>
+
+<body>
+  <section class = "banner">
+    <section class = "sidebar">
+      <div class="titlebx">
+        <h2>Driftwood</span></h2>
+      </div>
+      <div class="description">
+        <h3>Description: </h3>
+        <p>Upload an image of a car containing damages to detect the presence
+          of scuffs, scratches and dents.
+        </p>
+      </div>
+    </section>
+    <section class = "image_panel">
+
+      <section class = "info-panel">
+        {% if filename %}
+
+        	<div>
+        		<img src="{{ url_for('display_image', filename=filename) }}" style="width:auto;height:420px;">
+        	</div>
+
+        {% endif %}
+        <section class = "button-panel">
+          <form method="post" action="/" enctype="multipart/form-data">
+            <label class="image-upload">
+              <input type="file" name= "file" id="file" value = "" onchange="alertFilename()"  required/>Choose Upload
+            </label>
+            <label class="image-upload">
+              <input type="submit" value="Submit">Submit
+            </label>
+          </form>
+
+
+
+
+        </section>
+
+        <section class = "file-panel">
+          <div id = "filename-box" class = "image-name-box">No File Selected</div>
+        </section>
+
+      </section>
+
+    </section>
+
+
+
+
+    </section>
+
+  </section>
+
+  <script type="text/javascript">
+    function alertFilename()
+    {
+        var file = document.getElementById('file');
+        var filename = file.value.substring(file.value.indexOf("fakepath")+9, file.value.length);
+
+        var filename_box = document.getElementById('filename-box');
+        var full_text = filename;
+
+        if(full_text == ''){
+          full_text = "No File Selected"
+        }
+        filename_box.innerHTML = full_text;
+    }
+  </script>
+</body>
